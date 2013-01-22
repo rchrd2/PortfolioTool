@@ -20,12 +20,14 @@ Some configuration is required. See the makefile and config.php for variables.
 Note some functionality might not work because of external library dependencies.
 Please file issues in the forum so we can address these as they come up.
 
+Please see the following site to get an example of the possiblities 
+http://portfolio.rchrd.net/. More media will be added in the future.
+
 Enjoy!
 
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
 GETTING STARTED:
-
 
 cd into the tool directory. Run the following command first:
 	> make html 
@@ -38,12 +40,16 @@ This is the most used command.
 Later you can try using the sync command to sync this to your server. But first 
 make sure to modify the makefile to include the proper url:
 	> make sync
-	
-
 
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-RELEASE NOTES 
+SITES USING THIS TOOL:
+
+http://portfolio.rchrd.net/
+
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+RELEASE NOTES: 
 
 01/22/13 -- Pushed to Github®
 
