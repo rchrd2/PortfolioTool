@@ -26,7 +26,7 @@ define('OUTPUT_DIR', $output_dir);
 /********************************************************************************
  * LOAD XML SERIALIZER
  *******************************************************************************/ 
-set_include_path(get_include_path() . PATH_SEPARATOR . '../../../shared/php/lib/PEAR');
+set_include_path(get_include_path() . PATH_SEPARATOR . 'lib/PEAR');
 require_once "XML/Serializer.php";
 require_once "XML/Unserializer.php";
 require_once "XML/Util.php";
