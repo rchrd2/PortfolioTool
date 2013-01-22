@@ -8,28 +8,18 @@
 if (PHP_SAPI !== 'cli') { exit; }
 
 
-
 /********************************************************************************
- * Configuration
+ * Load configuration file
  *******************************************************************************/ 
-
-//$content_dir = dirname(__FILE__).'/../content';
-$content_dir  = '/Volumes/W. Eugene Smith/projects-documentation';
-$output_dir  = dirname(__FILE__).'/../public';
-$theme_dir   = dirname(__FILE__).'/themes/rchrd';
-
-//define('BASEURL', 'http://sites/net.rchrd.dotdotslash/dotdotslash.rchrd.net/sites/portfolio.rchrd.net/public');
-//define('BASEURL', 'http://portfolio.rchrd.net');
-define('BASEURL', '');
-define('OUTPUT_DIR', $output_dir);
+include 'config.php';
 
 /********************************************************************************
  * LOAD XML SERIALIZER
  *******************************************************************************/ 
 set_include_path(get_include_path() . PATH_SEPARATOR . 'lib/PEAR');
-require_once "XML/Serializer.php";
-require_once "XML/Unserializer.php";
-require_once "XML/Util.php";
+require_once 'XML/Serializer.php';
+require_once 'XML/Unserializer.php';
+require_once 'XML/Util.php';
 
 
 /********************************************************************************

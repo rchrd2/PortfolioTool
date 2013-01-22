@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<date>2006</date>
+	<title>Dreaming of You</title>
+	<body><![CDATA[
+Dreaming of You is a system for tapping into your computer's dreams. 
+<br>>
+There are three parts to this program. The first is a screen saver that visualizes 
+screenshots that it downloads from a web server. The second is a program that periodically
+takes screenshots of your computer and uploads them to the server. The third part is a 
+preference widget that displays information about the program and allows you to toggle 
+private mode, which temporarily disables taking screenshots.
+	]]></body>
+</meta>

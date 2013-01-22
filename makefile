@@ -7,10 +7,8 @@
 # Variables to modify
 #--------------------------------------------------------------------------------
 
-CONTENT_DIR = content
-THEME_DIR   = rchrd
-
-OUTPUT_DIR  = /Users/richard/Sites/net.rchrd.dotdotslash/dotdotslash.rchrd.net/sites/portfolio.rchrd.net/public/
+# These are used for the "clear" and "sync" commands
+OUTPUT_DIR  = /Users/richard/Sites/net.rchrd.dotdotslash/dotdotslash.rchrd.net/sites/portfolio.rchrd.net/tool/example/output
 SERVER_DIR  = rcaceres@portfolio.rchrd.net:/home/rcaceres/sites/net.rchrd.portfolio/public/
 
 #--------------------------------------------------------------------------------
@@ -32,8 +30,10 @@ html :
 	@echo 'Only compiling html.'
 	@php tool.php
 
+# Note if you want to avoid typing 'y' all the time, run it the following way:
+# bash> yes | make clear
 clear :
-	rm -r $(OUTPUT_DIR)/*
+	rm -r -v -i $(OUTPUT_DIR)/*
 
 all :
 	@echo 'The all target is disabled.'
@@ -56,13 +56,11 @@ sync-delete :
 	rsync --delete $(__SYNC_TEMPLATE__)
 
 #--------------------------------------------------------------------------------
-# make tests
+# make tests (these were just for my testing purposes)
 #--------------------------------------------------------------------------------
 
 curr_dir :
 	@echo $(__DIR__)
 
-var :
-	@echo '$(CONTENT_DIR)'
 	
 multiple : curr_dir var
