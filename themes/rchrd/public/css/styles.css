@@ -1,0 +1,155 @@
+body{
+    /* "Monaco" "Arial", "Verdana","Courier New", "Andale Mono", sans-serif */
+    font-family: "Andale Mono", "Verdana","Courier New", "Andale Mono", sans-serif;
+    font-size:10px;
+    line-height:14px;
+    color:#000000;
+    /*margin:49px auto 25px;*/
+    margin:49px 49px 25px 49px;
+
+    /*width:798px;*/
+    /*overflow:hidden;*/
+   /* -webkit-text-size-adjust:none;*/
+   background-color:#fff;
+}
+
+/*a{color:#ff6666;}
+a:hover{color:#ff9966;}*/
+/*a:visited{color:#cc6666;}*/
+
+
+/* ===================== */
+/* = Portfolio Styles  = */
+/* ===================== */
+#leftcol-portfolio{text-align:left;color:#000;white-space:pre;}
+a{text-decoration:none;color:#333}
+a:hover{text-decoration:none;color:#999999;background-color:#dddddd;}
+
+/*a:hover{text-decoration:none;color:#999999;background-color:#dddddd;}
+a:active{text-decoration:none;color:#999999;background-color:#dddddd;}*/
+
+.active {color:#999999;background-color:#dddddd;}
+.mediabox{margin-bottom:1em;overflow-y:hidden;overflow-x:auto;white-space:nowrap;
+    
+/*    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);*/ 
+/*    border-radius:5px;*/
+}
+.mediabox img{}
+.mediabox table{table-layout:inherit;margin:0px;padding:0;}
+.mediabox td{vertical-align:middle;padding:0;margin:0}
+.mediabox td div{width:492px;text-align:center;margin:0 102px 0 0;}
+.mediabox td div.last{margin:0;}
+
+.mediabox::-webkit-scrollbar {width:2em;height:1em;}
+.mediabox::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3); 
+    border-radius:5px;
+}
+.mediabox::-webkit-scrollbar-thumb {
+    border-radius:5px;
+    background-color:#ddd;
+    /*-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5); */
+}
+.mediabox::-webkit-scrollbar-thumb:hover {
+    border-radius:5px;
+    background-color:#ff6666;
+    /*-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5); */
+}
+
+.audio .waveform {
+/*    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3); 	
+	border-radius:5px;*/
+	height:28px;
+	width:492px;
+	margin-bottom:1em;
+
+	background-position:left center;
+	background-repeat:no-repeat;
+	background-color:#fff;
+}
+
+.project_body {margin-bottom:2em;}
+
+/* =================== */
+/* = Ontology Styles = */
+/* =================== */
+.Node{
+   margin-bottom:35px;
+}
+.Node .Title{
+   margin-bottom:14px;
+   line-height:14px;
+   color:#999999;
+}
+.Node .Meta {
+   line-height:14px;
+   background-color:#FFFFFF;
+   color:#CCCCCC;
+   height:14px;
+   margin-bottom:7px;
+}
+.Meta a {text-decoration:none;}
+.Meta .Title, .Meta .Date{
+  color:#999999;
+}
+.Node .ClassType {
+   color:#66ccff;
+}
+.Sound .ClassType {
+   color:#ff6666;
+}
+.Video .ClassType {
+   color:#ffcc66;
+}
+.Sound{}
+.Sound .License{
+  color:#999999;
+}
+
+.Image .Source{
+   color:#999999;
+}
+.EmbedCode{
+  margin-bottom:7px;
+}
+.Caption{
+  color:#999999;
+}
+
+.Snippit .ClassType {
+  color:#00cc00;
+}
+.Snippit .Caption{
+  font-size:11px;
+  margin-bottom:7px;
+  color:#000000;
+}
+.Snippit .Code {
+  padding-left:24px;
+  color:#00cc00;
+  border-left:#00cc00 3px solid;
+  white-space: pre;
+}
+.Snippit .Code:hover{
+  background-color:#000000;
+}
+.Snippit .Code pre {
+  padding-top:0px;
+  padding-bottom:0px;
+  margin:0;
+}
+
+/* =============== */
+/* = Work styles = */
+/* =============== */
+.MainText {}
+.MainText ul {list-style-type:none;}
+.Section_Header {font-size:14px;line-height:1;margin-bottom:14px;}
+.Projects_UL {list-style-type:none; padding:0; margin:0 0 28px 0}
+.Projects_UL li { margin-bottom:14px;}
+.Project_Title {display:inline; font-weight:bold;}
+.Project_Link {display:inline; float:right; color:#999999;}
+.Project_Technologies {}
+.Project_Description {}
+.Project_Timeframe { text-align:center; margin-top:0em; margin-bottom:14px; color:#999999;}
+	
