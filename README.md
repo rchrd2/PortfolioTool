@@ -17,16 +17,13 @@
 Description
 ===========
 
-Tool is a static html portfolio site generator (think jekyll, hyde, pelican, etc). 
-It simplifies the process of making a portfolio to simply organizing the work in 
-folders and generating the site.
+Tool is a static html portfolio site generator (think jekyll, hyde, pelican, etc). It simplifies the process of making a portfolio to simply organizing the work in folders and generating the site.
 
-Some configuration is required. See config.php for variables.
+Some configuration is required. See config/example.php for variables. Add more config files to manage more sites.
 
-Note some functionality might not work because of external library dependencies.
-Please file issues in the forum so we can address these as they come up.
+Note some functionality might not work because of external library dependencies. Please file issues in the forum so we can address these as they come up.
 
-Please see the following site to get an example of the possiblities 
+See the following site to get an example of the possiblities 
 <http://portfolio.rchrd.net/>. More media will be added in the future.
 
 Enjoy!
@@ -39,17 +36,14 @@ If you visit tool.php through your webserver there is a gui to help get you star
 
 You can also run tool.php from the command line.
 
-cd into the tool directory. Run the following command first:
-	> php tool.php -c example
- 
-If that works you should have generated html in example/output, resized and copied 
-images over into the output directory. 
+Run the following command to generate the example site. This should generate html in example/output and resize and copy images over into the output directory. 
 
-Later you can try using the sync command to sync this to your server. But first 
-make sure to modify the makefile to include the proper url:
-	> php tool.php -c mysite -s
+    php tool.php -c example
 
-Add more configurations to config.php
+Later you can try using the sync command to sync this to your server. Make sure to add your server details to a config.
+
+    php tool.php -c mysite -s
+
 
 
 Sites using this tool
@@ -81,19 +75,18 @@ Ascii art generated at <http://patorjk.com/software/taag/>
 TODO
 ====
 
-- Reduce the amount of configuration necessary.
-- Update makefile so it is relative and doesn't need absolute paths
+- [done] Reduce the amount of configuration necessary.
+- [done] Update makefile so it is relative and doesn't need absolute paths
 - Actually add an audio player
 - Replace waveform generation with something more compatible
 - [done] Add parsing of weblock files
 - Add parsing of mov files
-- Add parsing of rtf files
-- Add parsing of pdf files
+- [done] Add parsing of rtf files
+- [done] Add parsing of pdf files
 - Add parsing of md (markdown) files
 - Sniff out youtube and vimeo videos and replace with embeds
-- Create a user interface for tool in place of the make command
-- Create a setup file where a user can input their config or have multiple config
-  defintions and so they can control multiple sites!
+- [done] Create a user interface for tool in place of the make command
+- [done]Create a setup file where a user can input their config or have multiple config defintions and so they can control multiple sites!
 
 License
 =======
