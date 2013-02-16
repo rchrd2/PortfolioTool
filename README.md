@@ -1,3 +1,4 @@
+<pre>
 
     __/\\\\\\\\\\\\\\\______________________________/\\\\\\____        
      _\///////\\\/////______________________________\////\\\____       
@@ -9,72 +10,96 @@
            _______\/\\\________\///\\\\\/____\///\\\\\/____/\\\\\\\\\_ 
             _______\///___________\/////________\/////_____\/////////__
                                                                                    
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-DESCRIPTION:
+</pre>
 
-This tool parses content in folders and generates a static html portfolio site.
 
-Some configuration is required. See the makefile and config.php for variables.
+Description
+===========
+
+Tool is a static html portfolio site generator (think jekyll, hyde, pelican, etc). 
+It simplifies the process of making a portfolio to simply organizing the work in 
+folders and generating the site.
+
+Some configuration is required. See config.php for variables.
 
 Note some functionality might not work because of external library dependencies.
 Please file issues in the forum so we can address these as they come up.
 
 Please see the following site to get an example of the possiblities 
-http://portfolio.rchrd.net/. More media will be added in the future.
+<http://portfolio.rchrd.net/>. More media will be added in the future.
 
 Enjoy!
 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-GETTING STARTED:
+Getting Started
+===============
+
+If you visit tool.php through your webserver there is a gui to help get you started.
+
+You can also run tool.php from the command line.
 
 cd into the tool directory. Run the following command first:
-	> make html 
-If that works you should have generated html in example/output, then you can try
-to also generate the media with this make command:
-	> make 
-This will have resized images and copied them over into the output directory. 
-This is the most used command.
+	> php tool.php -c example
+ 
+If that works you should have generated html in example/output, resized and copied 
+images over into the output directory. 
 
 Later you can try using the sync command to sync this to your server. But first 
 make sure to modify the makefile to include the proper url:
-	> make sync
+	> php tool.php -c mysite -s
 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Add more configurations to config.php
 
-SITES USING THIS TOOL:
 
-http://portfolio.rchrd.net/
+Sites using this tool
+=====================
 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+- <http://portfolio.rchrd.net/>
 
-RELEASE NOTES: 
 
+Release Notes
+============= 
+
+02/15/13 -- Added a web gui to tool.php removed the make file to simplify config
 01/22/13 -- Pushed to Github®
 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-AUTHOR:
+Author
+======
 
-Richard Caceres <me@rchrd.net>
-Copyright Richard Caceres, 2012
-http://github.com/rcaceres/
-http://rchrd.net
+Richard Caceres
 
-Note: Ascii art generated at http://patorjk.com/software/taag/
+- <http://github.com/rcaceres/>
+- <http://rchrd.net>
 
 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ascii art generated at <http://patorjk.com/software/taag/>
 
-TODO:
+
+
+TODO
+====
 
 - Reduce the amount of configuration necessary.
-- Add an example directory of data to be used for testing.
+- Update makefile so it is relative and doesn't need absolute paths
+- Actually add an audio player
+- Replace waveform generation with something more compatible
+- [done] Add parsing of weblock files
+- Add parsing of mov files
+- Add parsing of rtf files
+- Add parsing of pdf files
+- Add parsing of md (markdown) files
+- Sniff out youtube and vimeo videos and replace with embeds
+- Create a user interface for tool in place of the make command
+- Create a setup file where a user can input their config or have multiple config
+  defintions and so they can control multiple sites!
 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+License
+=======
 
-OPEN SOURCE MIT LICENSE:
+MIT
+---
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
