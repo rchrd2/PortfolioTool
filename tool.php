@@ -1,47 +1,240 @@
 <?php
 /**
- * Generate this
+ *   __/\\\\\\\\\\\\\\\______________________________/\\\\\\____        
+ *    _\///////\\\/////______________________________\////\\\____       
+ *     _______\/\\\______________________________________\/\\\____      
+ *      _______\/\\\___________/\\\\\________/\\\\\_______\/\\\____     
+ *       _______\/\\\_________/\\\///\\\____/\\\///\\\_____\/\\\____    
+ *        _______\/\\\________/\\\__\//\\\__/\\\__\//\\\____\/\\\____   
+ *         _______\/\\\_______\//\\\__/\\\__\//\\\__/\\\_____\/\\\____  
+ *          _______\/\\\________\///\\\\\/____\///\\\\\/____/\\\\\\\\\_ 
+ *           _______\///___________\/////________\/////_____\/////////__
+ *                                                         
  * @author Richard
- * @version $Id$
  */ 
 
-if (PHP_SAPI !== 'cli') { exit; }
+
 
 
 /********************************************************************************
- * Load configuration file
+ * Load configuration files
  *******************************************************************************/ 
-include 'config.php';
+$config = array();
+foreach (glob("config/*.php") as $filename)
+{
+    include $filename;
+}
 
 /********************************************************************************
- * LOAD XML SERIALIZER
+ * LOAD LIBRARIES
  *******************************************************************************/ 
 set_include_path(get_include_path() . PATH_SEPARATOR . 'lib/PEAR');
 require_once 'XML/Serializer.php';
 require_once 'XML/Unserializer.php';
 require_once 'XML/Util.php';
+require_once 'lib/rtfclass.php';
 
 
 /********************************************************************************
- * Main program
+ * Web Interface program
  *******************************************************************************/ 
 
-$help_message = 
-'/**
- * Help Message: (empty)
- * 
- */
-';
+if (PHP_SAPI !== 'cli') { 
 
-$options     = getopt("ma:g:h");
+	if(isset($_POST['make'])) {
+		
+		$config_key = $_POST['config_key'];
+		$content_dir = $config[$config_key]['content_dir'];
+		$theme_dir = $config[$config_key]['theme_dir'];
+		$output_dir = $config[$config_key]['output_dir'];
 
-$tool        = new PortfolioTool();
+		/**
+		 * @todo add validation here
+		 */ 
 
-if(isset($options['m'])) {
-	$tool->copy_media = true;
+		$tool = new PortfolioTool();
+		$tool->copy_media = true;
+		$tool->generate($content_dir, $theme_dir, $output_dir);
+		
+		echo '<p>Html and media created successfully!</p>';
+
+		
+		//header('Location: ' . $_SERVER['REQUEST_URI']);
+		
+		//exit;
+
+	} else if (isset($_POST['make_html'])) {
+
+		$config_key = $_POST['config_key'];
+		$content_dir = $config[$config_key]['content_dir'];
+		$theme_dir = $config[$config_key]['theme_dir'];
+		$output_dir = $config[$config_key]['output_dir'];
+
+		/**
+		 * @todo add validation here
+		 */ 
+
+		$tool = new PortfolioTool();
+		$tool->generate($content_dir, $theme_dir, $output_dir);
+		
+		echo '<p>Html created successfully!</p>';
+		
+		//header('Location: ' . $_SERVER['REQUEST_URI']);
+		
+		//exit;
+
+	} else if (isset($_POST['make_publish'])) {
+
+
+	} else if (isset($_POST['make_sync'])) {
+		$config_key = $_POST['config_key'];
+		/*
+		 * We make sure to add a trailing slash to these directories for the rync 
+		 */ 
+		$output_dir = rtrim($config[$config_key]['output_dir'], '/') . '/';
+		$server_dir = rtrim($config[$config_key]['server_dir'], '/') . '/';
+				
+		$cmd = '/usr/bin/rsync --checksum -a -v ' . $output_dir . ' ' . $server_dir;
+		
+		echo '<p>Because this runs as the apache user, it is difficult to get rsync to work without a lot of tweaking. Here is the rsync command to copy and paste into terminal.</p>';
+		echo '<textarea style="font-family:courier; width:100%; height:10em;">'.$cmd.'</textarea>';
+		
+		//exec($cmd);
+		//header('Location: ' . $_SERVER['REQUEST_URI']);
+		//exit;
+		
+	} 
+
+/*
+ * Show the html form
+ */ 
+?>
+<html>
+	<head>
+		<style>
+			body{ font-family:Courier; font-size:10px; }
+		</style>
+	</head>
+	<body>
+<pre>
+
+    __/\\\\\\\\\\\\\\\______________________________/\\\\\\____        
+     _\///////\\\/////______________________________\////\\\____       
+      _______\/\\\______________________________________\/\\\____      
+       _______\/\\\___________/\\\\\________/\\\\\_______\/\\\____     
+        _______\/\\\_________/\\\///\\\____/\\\///\\\_____\/\\\____    
+         _______\/\\\________/\\\__\//\\\__/\\\__\//\\\____\/\\\____   
+          _______\/\\\_______\//\\\__/\\\__\//\\\__/\\\_____\/\\\____  
+           _______\/\\\________\///\\\\\/____\///\\\\\/____/\\\\\\\\\_ 
+            _______\///___________\/////________\/////_____\/////////__
+                                                                                   
+
+</pre>
+		<?php foreach($config as $key => $value):?>
+		<hr>
+		<h1><?php echo $key;?></h1>
+		<ul>
+			<?php foreach($value as $key2 => $value2): ?>
+				<li><code><?php echo $key2 . ": " . $value2;?></code></li>
+			<?php endforeach;?>
+		</ul>
+		<form method="POST">
+			<input type="hidden" name="config_key" value="<?php echo $key;?>"/>
+			<input type="submit" name="make" value="Make html and media" />
+			<input type="submit" name="make_html" value="Make html only" />
+			<input type="submit" name="make_sync" value="Sync to server" />
+		</form>
+		<?php endforeach;?>
+		<hr>
+<pre>F.A.Q
+...
+
+Q: I am getting permissions errors 
+A: This php file is running as the user <b><?php echo exec('whoami');?></b> who is in the groups 
+	<b><?php echo exec('groups ' . exec('whoami'));?></b>. 
+You must make sure <b>output_dir</b> is writable by this user. An example command to fix this would be:
+	sudo chown -R <?php echo exec('whoami');?> /path/to/my/output
+
+...
+
+Q: I'm ready for the command line!
+A: You can generate and sync with tool.php like this:
+	Generate html and media:
+		php tool.php -c example
+ 
+	Generate html and media and sync to server:
+		php tool.php -c mysite -s
+
+...
+
+</pre>
+	</body>
+</html>	
+<?
+
+
+} 
+
+/********************************************************************************
+ * Main CLI program
+ *******************************************************************************/ 
+
+if (PHP_SAPI == 'cli') {
+
+
+	$help_message = 
+	'/**
+	 * Help Message: (empty)
+	 * 
+	 */
+	';
+
+	$options     = getopt("htc:s");
+
+	if( ! isset($options['c'])) {
+		echo "A -c option must be present to specify which config to use. Exiting.\n";
+		exit;
+	}
+	
+	$config_key = $options['c'];
+	
+	if( ! isset($config[$config_key])) {
+		echo "No config found for this config key. Exiting.\n";
+		exit;
+	}
+	
+	if(isset($options['t'])) {
+		$tool->copy_media = false;
+	} else {
+		$tool->copy_media = true;
+	}
+	
+	$content_dir = $config[$config_key]['content_dir'];
+	$theme_dir = $config[$config_key]['theme_dir'];
+	$output_dir = $config[$config_key]['output_dir'];
+
+	/*
+	 * Run the tool
+	 */ 
+	echo "Running the tool...\n";
+	$tool = new PortfolioTool();
+	$tool->generate($content_dir, $theme_dir, $output_dir);
+	echo "tool completed.\n";
+	
+	/*
+	 * Sync if necessary
+	 */ 
+	if(isset($options['s'])) {
+		echo "Running rsync...\n";
+		$output_dir = rtrim($config[$config_key]['output_dir'], '/') . '/';
+		$server_dir = rtrim($config[$config_key]['server_dir'], '/') . '/';
+		$cmd = '/usr/bin/rsync --checksum -a -v ' . $output_dir . ' ' . $server_dir;
+		echo "The command is:\n" . $cmd . "\n";
+		system($cmd);
+		echo "Rsync complete.\n";
+	}
+	
 }
-
-$tool->generate($content_dir, $theme_dir, $output_dir);
 
 
 class PortfolioTool {
@@ -51,6 +244,11 @@ class PortfolioTool {
 	public function __construct() {}
 	
 	public function generate($content_dir, $theme_dir, $output_dir) {
+		/*
+		 * These defines are a bit of a hack
+		 */ 
+		define('BASEURL', '');
+		define('OUTPUT_DIR', $output_dir);
 		
 		$content_map = $this->_generateContentMap($content_dir);
 		$this->_generateOutput($content_map, $theme_dir, $output_dir);
@@ -150,10 +348,10 @@ class PortfolioTool {
 		 */ 
 		$project_data = array(
 			'file_path' => null,
-			'body' => null,
+			'body' => '',
 			'date' => null,
 			'title' => null,
-			'links' => null,
+			'link' => array(),
 			'materials' => null,
 			'media' => array(
 				'image_files'    => array(),
@@ -195,6 +393,19 @@ class PortfolioTool {
 			
 		}
 		
+		/*
+		 * We want to normalize link to always be an array
+		 */ 
+		if( ! is_array($project_data['link'])) {
+			$project_data['link'] = array($project_data['link']);
+			/*
+			 * Remove any empty link stubs
+			 */ 
+			$project_data['link'] = array_filter( $project_data['link'], 'strlen' );
+			
+		}
+		
+		//var_dump($project_data['link']);
 		
 		/*
 		 * Get the media from the directory. It goes to another function
@@ -205,7 +416,6 @@ class PortfolioTool {
 		
 		//echo "Project_dir\n";
 		//var_dump($project_dir);
-		
 		//var_dump($project_data);
 
 		return $project_data;
@@ -217,6 +427,10 @@ class PortfolioTool {
 		if( is_array($file) ) {
 
 			foreach($file as $file1) {
+				
+				/* 
+				 * Recursively call this function for sub-directories 
+				 */
 				
 				$this->_parseProjectDirFile($file1, $project_data, $project_root, $project_root_relative);
 			}
@@ -238,17 +452,28 @@ class PortfolioTool {
 				$project_data['media']['video_files'][] = array($file, $new_name);
 			} else if ( in_array($extension, array('mp3', 'wav', 'aif', 'midi') )) {
 				$project_data['media']['audio_files'][] = array($file, $new_name);
-			} else if ( in_array($extension, array('weblock') )) {
+			} else if ( in_array($extension, array('webloc') )) {
 				/*
 				 * Parse the weblock file and add it to the links array
 				 */ 
+				$link = $this->_parseWebloc($file);
+				if( $link != null ) {
+					$project_data['link'][] = $link;
+				}
 				
+			} else if ( in_array($extension, array('rtf') )) {
+				
+				$project_data['body'] .= $this->_parseRTF($file);
 				
 			} else if ( in_array($extension, array('xml') )) {
 				/*
 				 * Do not accept xml files, because of the meta file.
 				 */ 
-			} else {
+			} else if ( in_array($extension, array('pdf', 'zip') )) {
+				
+				$project_data['media']['download_files'][] = array($file, $new_name);
+				
+			} else if ( ! is_dir($file)) {
 				$project_data['media']['download_files'][] = array($file, $new_name);
 			}
 			
@@ -331,21 +556,7 @@ class PortfolioTool {
 							$new_file_path = $output_dir . '/media/' . $new_name;
 						
 							if($media_type == 'image_files') {
-								
-								// $im = new Imagick($file_path_full);
-								// $im->resizeImage(
-								// 	492, 
-								// 	492,
-								// 	Imagick::FILTER_CATROM,
-								// 	0.65,
-								// 	true);
-								// $im->setCompressionQuality(92);
-								// $im->writeImage($new_file_path);
-								// $im->destroy();
-								
-								// Get new sizes
-								
-								
+							
 								$resize_result = $this->_image_resize(
 									$file_path_full, 
 									$new_file_path, 
@@ -365,6 +576,10 @@ class PortfolioTool {
 									//copy($file_path_full, $new_file_path);
 									$this->_generate_waveform($file_path_full, $new_file_path);
 								}
+								
+							} else if ($media_type == 'download_files') {
+								
+								copy($file_path_full, $new_file_path);
 								
 							}
 						
@@ -559,8 +774,43 @@ class PortfolioTool {
 			exec($cmd);
 
 		} 
-
 	}
+	
+	
+	/**
+	 * This parses a webloc link file
+	 * @return array($name, $url) or null on failure
+	 */ 
+	protected function _parseWebloc($file_path_full) {	
+		$fileContent = implode('', file($file_path_full));
+		preg_match('/\<key\>URL\<\/key\>.*?\<string\>(.*?)\<\/string\>/mis', $fileContent, $foundA);
+		$name = basename($file_path_full, '.webloc');
+		if(count($foundA) > 0) {
+			$url = $foundA[1];
+			return array($name, $url);
+		} else {
+			return null;
+		}
+    }
+
+	/**
+	 * This reads an RTF file and returns and HTML string
+	 */ 
+	protected function _parseRTF($file_path_full) {
+		$rtf = file_get_contents($file_path_full);
+		$r = new rtf($rtf);
+		$r->output("html");
+		$r->parse();
+		if(count($r->err) == 0) {
+			$out = nl2br($r->out) . $r->outstyles;	
+			echo $out;
+			return $out;
+		} else {
+			echo $r->err;
+			return '';
+		}
+	}
+	
 }
 
 

@@ -10,7 +10,7 @@
 	<link href="<?=BASEURL;?>/css/styles.css" rel="stylesheet" type="text/css" charset="utf-8">
 	<link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
 
-	<title>Richard Caceres<?= isset($project['title']) ? ' |' . $project['title'] : '';?></title>
+	<title>Richard Caceres<?= isset($project['title']) ? ' | ' . $project['title'] : '';?></title>
 </head>
 
 
@@ -57,9 +57,8 @@ foreach($content_map as $category => $projects) {
 ?>
 </div>
 <br>
-<div>Richard C&aacute;ceres is an artist who creates work 
-regarding electronics and experimental systems
-for musical expression.</div>
+<div>Richard C&aacute;ceres is an artist who creates 
+experimental systems for musical expression.</div>
 <div>
 Contact: <script type="text/javascript">
 	user = "me"; site = "rchrd.net";
@@ -69,7 +68,6 @@ Contact: <script type="text/javascript">
 </div>
 
 </div>
-
 		<div class="content column span-5 last">
 			
 			<?php if( ! isset($project)):?>
@@ -123,6 +121,8 @@ Contact: <script type="text/javascript">
 					</table>
 				</div>
 				<?php endif;?>
+				
+				
 				<?php if(count($project['media']['audio_files']) > 0):?>
 				<div class="audio">
 					<?php 
@@ -146,6 +146,7 @@ Contact: <script type="text/javascript">
 					?>
 				</div>
 				<?php endif;?>
+				
 				<div class="project_body">
 				<?php
 				/*
@@ -158,6 +159,42 @@ Contact: <script type="text/javascript">
 				}
 				?>
 				</div>
+	
+				<?php 
+				/*
+				 * Print out associated links (from weblock files or from in the meta xml
+				 */ 
+				if(count($project['link']) > 0):?>
+				<div class="links">
+					<div class="links_label">Links:</div>
+					<?php 
+					for($i = 0; $i < count($project['link']); $i++) {
+						if( is_array($project['link'][$i]) ) {
+							echo '<div class="link"><a href="'.$project['link'][$i][1].'">'.$project['link'][$i][0].'</a></div>';
+						} else {
+							echo '<div class="link"><a href="'.$project['link'][$i].'">'.$project['link'][$i].'</a></div>';	
+						}
+					}
+					?>
+				</div>
+				<?php endif;?>
+			
+				<?php
+				/*
+				 * Print out downloads
+				 */ 
+				if(count($project['media']['download_files']) > 0):?>
+				<div class="links">
+					<div class="links_label">Additional Files:</div>
+					<?php 
+					for($i = 0; $i < count($project['media']['download_files']); $i++) {
+						echo '<div class="link"><a href="'.BASEURL . '/media/' . $project['media']['download_files'][$i][1].'">'.basename($project['media']['download_files'][$i][0]).'</a></div>';	
+					}
+					?>
+				</div>
+				<?php endif;?>	
+
+			
 				<?php
 				/*
 				 * Print out materials
@@ -165,6 +202,9 @@ Contact: <script type="text/javascript">
 				if( isset($project['materials']) && strlen($project['materials']) > 0 ) {
 					echo '<div class="materials"><span class="materials_label">Materials: </span><span class="materials_text">'.$project['materials'].'</span></div>';
 				}
+				?>
+				
+				<?php
 				/*
 				 * Print out date
 				 */ 
@@ -172,7 +212,7 @@ Contact: <script type="text/javascript">
 					echo '<div class="date">'.$project['date'].'</div>';
 				}
 				?>	
-
+		
 			
 			<?php endif;?>
 
