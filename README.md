@@ -1,25 +1,17 @@
 <pre>
-
-    __/\\\\\\\\\\\\\\\______________________________/\\\\\\____        
-     _\///////\\\/////______________________________\////\\\____       
-      _______\/\\\______________________________________\/\\\____      
-       _______\/\\\___________/\\\\\________/\\\\\_______\/\\\____     
-        _______\/\\\_________/\\\///\\\____/\\\///\\\_____\/\\\____    
-         _______\/\\\________/\\\__\//\\\__/\\\__\//\\\____\/\\\____   
-          _______\/\\\_______\//\\\__/\\\__\//\\\__/\\\_____\/\\\____  
-           _______\/\\\________\///\\\\\/____\///\\\\\/____/\\\\\\\\\_ 
-            _______\///___________\/////________\/////_____\/////////__
-                                                                                   
-
+        __   __   __  ___  ___  __          __     ___  __   __       
+       |__) /  \ |__)  |  |__  /  \ |    | /  \     |  /  \ /  \ |    
+       |    \__/ |  \  |  |    \__/ |___ | \__/     |  \__/ \__/ |___ 
+                                                                           
 </pre>
 
 
 Description
 ===========
 
-Tool is a static html portfolio site generator (think jekyll, hyde, pelican, etc). It simplifies the process of making a portfolio to simply organizing the work in folders and generating the site.
+Portfolio Tool is a static site generator (think jekyll, hyde, pelican, etc) for porfolios. It simplifies the process of making a portfolio to simply organizing the work in folders and generating the site.
 
-Some configuration is required. See config/example.php for variables. Add more config files to manage more sites.
+Some configuration is required. See config/example.php for settings. Add more config files to manage more sites.
 
 Note some functionality might not work because of external library dependencies. Please file issues in the forum so we can address these as they come up.
 
@@ -32,7 +24,7 @@ Enjoy!
 Getting Started
 ===============
 
-If you visit tool.php through your webserver there is a gui to help get you started.
+If you visit tool.php through your webserver there is a GUI to help get you started.
 
 You can also run tool.php from the command line.
 
@@ -59,19 +51,6 @@ Release Notes
 01/22/13 -- Pushed to Github®
 
 
-Author
-======
-
-Richard Caceres
-
-- <http://github.com/rcaceres/>
-- <http://rchrd.net>
-
-
-Ascii art generated at <http://patorjk.com/software/taag/>
-
-
-
 TODO
 ====
 
@@ -87,6 +66,20 @@ TODO
 - Sniff out youtube and vimeo videos and replace with embeds
 - [done] Create a user interface for tool in place of the make command
 - [done]Create a setup file where a user can input their config or have multiple config defintions and so they can control multiple sites!
+
+
+Author
+======
+
+Richard Caceres
+
+- <http://github.com/rcaceres/>
+- <http://rchrd.net>
+
+
+Ascii art generated at <http://patorjk.com/software/taag/>
+
+
 
 License
 =======
